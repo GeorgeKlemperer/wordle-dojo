@@ -1,0 +1,81 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  max-width: 60rem;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.stack > * + * {
+  margin-top: 3rem;
+}
+
+.center {
+  max-width: 40rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.justify-space-between {
+  justify-content: space-between;
+}
+
+.date {
+  text-align: left;
+}
+
+#randomWord {
+  font-size: 6rem;
+}
+
+/* Keyboard */
+.keyboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.keyboardRow {
+  display: flex;
+  justify-content: center;
+}
+
+.key {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  min-width: 3rem;
+  height: 3rem;
+  margin: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+#enterButton {
+  width: 6rem;
+}
+
+#backspaceButton {
+  background-image: url(images/backspace.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 60%;
+  width: 7rem;
+}
+
+.key:hover {
+  -webkit-filter: brightness(60%);
+}
