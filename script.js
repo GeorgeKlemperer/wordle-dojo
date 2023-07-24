@@ -164,18 +164,29 @@ function submitGuess() {
       if (i === 2) GL3.style.backgroundColor = "green";
       if (i === 3) GL4.style.backgroundColor = "green";
       if (i === 4) GL5.style.backgroundColor = "green";
+      document.getElementById(`${guessArray[i]}`).style.backgroundColor =
+        "green";
     } else if (answerArray.includes(guessArray[i])) {
       if (i === 0) GL1.style.backgroundColor = "orange";
       if (i === 1) GL2.style.backgroundColor = "orange";
       if (i === 2) GL3.style.backgroundColor = "orange";
       if (i === 3) GL4.style.backgroundColor = "orange";
       if (i === 4) GL5.style.backgroundColor = "orange";
+      if (
+        document.getElementById(`${guessArray[i]}`).style.backgroundColor !==
+        "green"
+      ) {
+        document.getElementById(`${guessArray[i]}`).style.backgroundColor =
+          "orange";
+      }
     } else {
       if (i === 0) GL1.style.backgroundColor = "lightgrey";
       if (i === 1) GL2.style.backgroundColor = "lightgrey";
       if (i === 2) GL3.style.backgroundColor = "lightgrey";
       if (i === 3) GL4.style.backgroundColor = "lightgrey";
       if (i === 4) GL5.style.backgroundColor = "lightgrey";
+      document.getElementById(`${guessArray[i]}`).style.backgroundColor =
+        "lightgrey";
     }
   }
 
