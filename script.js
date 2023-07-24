@@ -22,11 +22,8 @@ let formattedDate =
   date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear();
 console.log(formattedDate);
 
-const letter1 = document.getElementById("randomWordLetter1");
-const letter2 = document.getElementById("randomWordLetter2");
-const letter3 = document.getElementById("randomWordLetter3");
-const letter4 = document.getElementById("randomWordLetter4");
-const letter5 = document.getElementById("randomWordLetter5");
+const answerElement = document.getElementById("answer");
+let randomWord = "";
 
 // Function to get a single random 5-letter word
 async function getRandomWord() {
@@ -40,13 +37,9 @@ async function getRandomWord() {
 
     // Check if the response is successful
     if (response.ok) {
-      const randomWord = data[0].toUpperCase();
+      randomWord = data[0].toUpperCase();
       //Display the random word
-      letter1.innerText = randomWord.charAt(0);
-      letter2.innerText = randomWord.charAt(1);
-      letter3.innerText = randomWord.charAt(2);
-      letter4.innerText = randomWord.charAt(3);
-      letter5.innerText = randomWord.charAt(4);
+      answerElement.innerHTML = randomWord;
 
       console.log(randomWord);
     } else {
@@ -149,11 +142,11 @@ document.addEventListener("keydown", handleRealKeyPress);
 
 function submitGuess() {
   console.log("submit");
-  let AL1 = document.getElementById("randomWordLetter1").innerHTML;
-  let AL2 = document.getElementById("randomWordLetter2").innerHTML;
-  let AL3 = document.getElementById("randomWordLetter3").innerHTML;
-  let AL4 = document.getElementById("randomWordLetter4").innerHTML;
-  let AL5 = document.getElementById("randomWordLetter5").innerHTML;
+  let AL1 = randomWord.charAt(0).toUpperCase();
+  let AL2 = randomWord.charAt(1).toUpperCase();
+  let AL3 = randomWord.charAt(2).toUpperCase();
+  let AL4 = randomWord.charAt(3).toUpperCase();
+  let AL5 = randomWord.charAt(4).toUpperCase();
 
   let answerArray = [AL1, AL2, AL3, AL4, AL5];
   console.log(answerArray);
@@ -199,7 +192,11 @@ function submitGuess() {
   console.log(guessNumber);
   guess = "";
 
-  if (guessNumber === 6) {
+  if (guessNumber === 7) {
     loseGame();
   }
+}
+
+function loseGame() {
+  answerElement.style.visibility = "visible";
 }

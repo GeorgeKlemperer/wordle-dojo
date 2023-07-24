@@ -8,6 +8,11 @@ h1,
   display: none;
 }
 
+#answer {
+  font-size: 3rem;
+  visibility: hidden;
+}
+
 body {
   max-width: 60rem;
   margin: 0 auto;
