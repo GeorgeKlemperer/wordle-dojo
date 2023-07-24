@@ -37,6 +37,20 @@ body {
   font-size: 6rem;
 }
 
+.guess {
+  font-size: 3.2rem;
+}
+
+.guess * {
+  display: flex;
+  height: 6rem;
+  width: 6rem;
+  padding: auto;
+  border: 2px solid grey;
+  align-items: center;
+  justify-content: center;
+}
+
 /* Keyboard */
 .keyboard {
   display: flex;
