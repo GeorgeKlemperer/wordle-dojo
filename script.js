@@ -115,30 +115,21 @@ function handleKeyClick(event) {
   }
 }
 
-// Function to handle real keyboard events
 function handleRealKeyPress(event) {
+  const keyPressed = event.key.toUpperCase();
+
   // Check if the pressed key is a letter (A-Z or a-z)
-  if (
-    (event.keyCode >= 65 && event.keyCode <= 90) ||
-    (event.keyCode >= 97 && event.keyCode <= 122)
-  ) {
-    if (guess.length <= 4)
-      // Append the pressed letter to the guess
-      guess += event.key.toUpperCase();
-    // Update the HTML elements with guessed letters
-    updateHTML();
+  if (/^[A-Z]$/.test(keyPressed) && guess.length <= 4) {
+    // Append the pressed letter to the guess
+    guess += keyPressed;
   }
 
   // Check if the pressed key is the backspace key (KeyCode 8)
   if (event.keyCode === 8) {
-    // Prevent the default behavior of the backspace key (delete text)
     event.preventDefault();
     if (guess.length > 0) {
       // Remove the last character from the guess
       guess = guess.slice(0, -1);
-
-      // Update the HTML elements with guessed letters
-      updateHTML();
     }
   }
 
@@ -146,6 +137,9 @@ function handleRealKeyPress(event) {
   if (event.keyCode === 13 && guess.length === 5) {
     submitGuess();
   }
+
+  // Update the HTML elements with guessed letters
+  updateHTML();
 }
 
 // Add an event listener for 'keydown' event on the document
@@ -153,6 +147,32 @@ document.addEventListener("keydown", handleRealKeyPress);
 
 function submitGuess() {
   console.log("submit");
+  let AL1 = document.getElementById("randomWordLetter1").innerHTML;
+  let AL2 = document.getElementById("randomWordLetter2").innerHTML;
+  let AL3 = document.getElementById("randomWordLetter3").innerHTML;
+  let AL4 = document.getElementById("randomWordLetter4").innerHTML;
+  let AL5 = document.getElementById("randomWordLetter5").innerHTML;
+
+  let answerArray = [AL1, AL2, AL3, AL4, AL5];
+  console.log(answerArray);
+
+  let guessArray = guess.split("");
+  console.log(guessArray);
+
+  // Compare the two arrays
+  for (let i = 0; i < answerArray.length; i++) {
+    if (guessArray.includes(answerArray[i])) {
+      console.log(
+        `Letter ${answerArray[i]} is present in both the answer and the guess.`
+      );
+      if (guessArray[i] === answerArray[i]) {
+        console.log(
+          `Letter ${answerArray[i]} is present in the same position in both the answer and the guess.`
+        );
+      }
+    }
+  }
+
   guessNumber += 1;
   console.log(guessNumber);
   guess = "";
