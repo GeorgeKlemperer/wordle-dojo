@@ -59,35 +59,29 @@ async function getRandomWord() {
 getRandomWord();
 
 let guessNumber = 1;
-let guess1 = "";
+let guess = "";
 // let guess2 = "";
 // let guess3 = "";
 // let guess4 = "";
 // let guess5 = "";
 
 function updateHTML() {
-  let guess1FirstLetter = document.getElementById(
-    `guessLetter${guessNumber}-1`
-  );
-  guess1FirstLetter.innerHTML = guess1.charAt(0).toUpperCase();
-  let guess1SecondLetter = document.getElementById(
+  let guessFirstLetter = document.getElementById(`guessLetter${guessNumber}-1`);
+  guessFirstLetter.innerHTML = guess.charAt(0).toUpperCase();
+  let guessSecondLetter = document.getElementById(
     `guessLetter${guessNumber}-2`
   );
-  guess1SecondLetter.innerHTML = guess1.charAt(1).toUpperCase();
-  let guess1ThirdLetter = document.getElementById(
-    `guessLetter${guessNumber}-3`
-  );
-  guess1ThirdLetter.innerHTML = guess1.charAt(2).toUpperCase();
-  let guess1FourthLetter = document.getElementById(
+  guessSecondLetter.innerHTML = guess.charAt(1).toUpperCase();
+  let guessThirdLetter = document.getElementById(`guessLetter${guessNumber}-3`);
+  guessThirdLetter.innerHTML = guess.charAt(2).toUpperCase();
+  let guessFourthLetter = document.getElementById(
     `guessLetter${guessNumber}-4`
   );
-  guess1FourthLetter.innerHTML = guess1.charAt(3).toUpperCase();
-  let guess1FifthLetter = document.getElementById(
-    `guessLetter${guessNumber}-5`
-  );
-  guess1FifthLetter.innerHTML = guess1.charAt(4).toUpperCase();
-  console.log(guess1);
-  console.log(guess1.length);
+  guessFourthLetter.innerHTML = guess.charAt(3).toUpperCase();
+  let guessFifthLetter = document.getElementById(`guessLetter${guessNumber}-5`);
+  guessFifthLetter.innerHTML = guess.charAt(4).toUpperCase();
+  console.log(guess);
+  console.log(guess.length);
 }
 
 // Add event listener to each digital keyboard key
@@ -100,18 +94,24 @@ keys.forEach((key) => {
 function handleKeyClick(event) {
   const clickedKey = event.target;
 
+  if (clickedKey.id === "enterButton" && guess.length === 5) {
+    submitGuess();
+  }
+
   if (clickedKey.id === "backspaceButton") {
     // Handle the backspace button click
-    if (guessNumber === 1 && guess1.length > 0) {
+    if (guess.length > 0) {
       // Remove the last character from the guess
-      guess1 = guess1.slice(0, -1);
+      guess = guess.slice(0, -1);
       // Update the HTML elements with guessed letters
       updateHTML();
     }
   } else {
     // Handle other keyboard keys
-    guess1 += clickedKey.textContent;
-    updateHTML();
+    if (guess.length <= 4 && clickedKey.id !== "enterButton") {
+      guess += clickedKey.textContent;
+      updateHTML();
+    }
   }
 }
 
@@ -122,9 +122,9 @@ function handleRealKeyPress(event) {
     (event.keyCode >= 65 && event.keyCode <= 90) ||
     (event.keyCode >= 97 && event.keyCode <= 122)
   ) {
-    if (guessNumber === 1 && guess1.length <= 4)
+    if (guess.length <= 4)
       // Append the pressed letter to the guess
-      guess1 += event.key.toUpperCase();
+      guess += event.key.toUpperCase();
     // Update the HTML elements with guessed letters
     updateHTML();
   }
@@ -133,15 +133,27 @@ function handleRealKeyPress(event) {
   if (event.keyCode === 8) {
     // Prevent the default behavior of the backspace key (delete text)
     event.preventDefault();
-    if (guessNumber === 1 && guess1.length > 0) {
+    if (guess.length > 0) {
       // Remove the last character from the guess
-      guess1 = guess1.slice(0, -1);
+      guess = guess.slice(0, -1);
 
       // Update the HTML elements with guessed letters
       updateHTML();
     }
   }
+
+  // Check if the pressed key is the enter key (KeyCode 13)
+  if (event.keyCode === 13 && guess.length === 5) {
+    submitGuess();
+  }
 }
 
 // Add an event listener for 'keydown' event on the document
 document.addEventListener("keydown", handleRealKeyPress);
+
+function submitGuess() {
+  console.log("submit");
+  guessNumber += 1;
+  console.log(guessNumber);
+  guess = "";
+}
