@@ -55,10 +55,6 @@ getRandomWord();
 
 let guessNumber = 1;
 let guess = "";
-// let guess2 = "";
-// let guess3 = "";
-// let guess4 = "";
-// let guess5 = "";
 
 function updateHTML() {
   let guessFirstLetter = document.getElementById(`guessLetter${guessNumber}-1`);
