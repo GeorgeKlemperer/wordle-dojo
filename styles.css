@@ -2,6 +2,12 @@
   box-sizing: border-box;
 }
 
+/*  Comment this out to see hidden word */
+h1,
+#randomWord {
+  display: none;
+}
+
 body {
   max-width: 60rem;
   margin: 0 auto;

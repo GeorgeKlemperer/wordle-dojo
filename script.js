@@ -47,6 +47,8 @@ async function getRandomWord() {
       letter3.innerText = randomWord.charAt(2);
       letter4.innerText = randomWord.charAt(3);
       letter5.innerText = randomWord.charAt(4);
+
+      console.log(randomWord);
     } else {
       throw new Error("Failed to fetch random word");
     }
@@ -159,21 +161,45 @@ function submitGuess() {
   let guessArray = guess.split("");
   console.log(guessArray);
 
+  let GL1 = document.getElementById(`guessLetter${guessNumber}-1`);
+  let GL2 = document.getElementById(`guessLetter${guessNumber}-2`);
+  let GL3 = document.getElementById(`guessLetter${guessNumber}-3`);
+  let GL4 = document.getElementById(`guessLetter${guessNumber}-4`);
+  let GL5 = document.getElementById(`guessLetter${guessNumber}-5`);
+
   // Compare the two arrays
   for (let i = 0; i < answerArray.length; i++) {
-    if (guessArray.includes(answerArray[i])) {
-      console.log(
-        `Letter ${answerArray[i]} is present in both the answer and the guess.`
-      );
-      if (guessArray[i] === answerArray[i]) {
-        console.log(
-          `Letter ${answerArray[i]} is present in the same position in both the answer and the guess.`
-        );
-      }
+    if (guessArray[i] === answerArray[i]) {
+      if (i === 0) GL1.style.backgroundColor = "green";
+      if (i === 1) GL2.style.backgroundColor = "green";
+      if (i === 2) GL3.style.backgroundColor = "green";
+      if (i === 3) GL4.style.backgroundColor = "green";
+      if (i === 4) GL5.style.backgroundColor = "green";
+    }
+    if (
+      answerArray.includes(guessArray[i]) &&
+      guessArray[i] !== answerArray[i]
+    ) {
+      if (i === 0) GL1.style.backgroundColor = "orange";
+      if (i === 1) GL2.style.backgroundColor = "orange";
+      if (i === 2) GL3.style.backgroundColor = "orange";
+      if (i === 3) GL4.style.backgroundColor = "orange";
+      if (i === 4) GL5.style.backgroundColor = "orange";
+    }
+    if (!answerArray.includes(guessArray[i])) {
+      if (i === 0) GL1.style.backgroundColor = "lightgrey";
+      if (i === 1) GL2.style.backgroundColor = "lightgrey";
+      if (i === 2) GL3.style.backgroundColor = "lightgrey";
+      if (i === 3) GL4.style.backgroundColor = "lightgrey";
+      if (i === 4) GL5.style.backgroundColor = "lightgrey";
     }
   }
 
   guessNumber += 1;
   console.log(guessNumber);
   guess = "";
+
+  if (guessNumber === 6) {
+    loseGame();
+  }
 }
