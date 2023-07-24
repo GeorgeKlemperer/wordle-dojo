@@ -164,18 +164,13 @@ function submitGuess() {
       if (i === 2) GL3.style.backgroundColor = "green";
       if (i === 3) GL4.style.backgroundColor = "green";
       if (i === 4) GL5.style.backgroundColor = "green";
-    }
-    if (
-      answerArray.includes(guessArray[i]) &&
-      guessArray[i] !== answerArray[i]
-    ) {
+    } else if (answerArray.includes(guessArray[i])) {
       if (i === 0) GL1.style.backgroundColor = "orange";
       if (i === 1) GL2.style.backgroundColor = "orange";
       if (i === 2) GL3.style.backgroundColor = "orange";
       if (i === 3) GL4.style.backgroundColor = "orange";
       if (i === 4) GL5.style.backgroundColor = "orange";
-    }
-    if (!answerArray.includes(guessArray[i])) {
+    } else {
       if (i === 0) GL1.style.backgroundColor = "lightgrey";
       if (i === 1) GL2.style.backgroundColor = "lightgrey";
       if (i === 2) GL3.style.backgroundColor = "lightgrey";
