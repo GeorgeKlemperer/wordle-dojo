@@ -175,6 +175,7 @@ function submitGuess() {
   }
 
   // Compare the two arrays
+  // Check for green letters
   for (let i = 0; i < answerArray.length; i++) {
     if (guessArray[i] === answerArray[i]) {
       answerArray[i] = "removed";
@@ -198,6 +199,7 @@ function submitGuess() {
     }
   }
 
+  // Check for orange letters
   for (let i = 0; i < answerArray.length; i++) {
     if (
       answerArray.includes(guessArray[i]) &&
@@ -205,7 +207,7 @@ function submitGuess() {
     ) {
       answerArray[answerArray.indexOf(guessArray[i])] = "removed";
       console.log(answerArray);
-      matchedIndexes.push(i);
+      matchedIndexes.push(i); // This prevents the greying function later overwriting orange letters.
       if (i === 0) GL1.style.backgroundColor = "orange";
       if (i === 1) GL2.style.backgroundColor = "orange";
       if (i === 2) GL3.style.backgroundColor = "orange";
@@ -227,6 +229,7 @@ function submitGuess() {
     }
   }
 
+  // Shade in grey remaining letters
   for (let i = 0; i < answerArray.length; i++) {
     if (!answerArray.includes(guessArray[i]) && !matchedIndexes.includes(i)) {
       if (i === 0) GL1.style.backgroundColor = "lightgrey";
