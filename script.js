@@ -156,9 +156,30 @@ function submitGuess() {
   let GL4 = document.getElementById(`guessLetter${guessNumber}-4`);
   let GL5 = document.getElementById(`guessLetter${guessNumber}-5`);
 
-  // Compare the two arrays
+  let matchedLetters = [];
+
   for (let i = 0; i < answerArray.length; i++) {
     if (guessArray[i] === answerArray[i]) {
+      matchedLetters.push(guessArray[i]);
+      console.log(`Matched letters: ${matchedLetters}`);
+    }
+  }
+
+  let matchedIndexes = [];
+
+  for (let i = 0; i < answerArray.length; i++) {
+    if (guessArray[i] === answerArray[i]) {
+      matchedIndexes.push(i);
+      console.log(`Matched indexes: ${matchedIndexes}`);
+    }
+  }
+
+  // Compare the two arrays
+  // Check for green letters
+  for (let i = 0; i < answerArray.length; i++) {
+    if (guessArray[i] === answerArray[i]) {
+      answerArray[i] = "removed";
+      console.log(answerArray);
       if (i === 0) GL1.style.backgroundColor = "green";
       if (i === 1) GL2.style.backgroundColor = "green";
       if (i === 2) GL3.style.backgroundColor = "green";
@@ -166,16 +187,21 @@ function submitGuess() {
       if (i === 4) GL5.style.backgroundColor = "green";
       document.getElementById(`${guessArray[i]}`).style.backgroundColor =
         "green";
-      if (
-        GL1.style.backgroundColor === "green" &&
-        GL2.style.backgroundColor === "green" &&
-        GL3.style.backgroundColor === "green" &&
-        GL4.style.backgroundColor === "green" &&
-        GL5.style.backgroundColor === "green"
-      ) {
+      if (matchedIndexes.length === 5) {
         winGame();
       }
-    } else if (answerArray.includes(guessArray[i])) {
+    }
+  }
+
+  // Check for orange letters
+  for (let i = 0; i < answerArray.length; i++) {
+    if (
+      answerArray.includes(guessArray[i]) &&
+      !matchedLetters.includes(guessArray[i])
+    ) {
+      answerArray[answerArray.indexOf(guessArray[i])] = "removed";
+      console.log(answerArray);
+      matchedIndexes.push(i); // This prevents the greying function later overwriting orange letters.
       if (i === 0) GL1.style.backgroundColor = "orange";
       if (i === 1) GL2.style.backgroundColor = "orange";
       if (i === 2) GL3.style.backgroundColor = "orange";
@@ -188,14 +214,32 @@ function submitGuess() {
         document.getElementById(`${guessArray[i]}`).style.backgroundColor =
           "orange";
       }
-    } else {
+    } else if (
+      answerArray.includes(guessArray[i]) &&
+      matchedLetters.includes(guessArray[i])
+    ) {
+      let indexToRemove = matchedLetters.indexOf(guessArray[i]);
+      matchedLetters.splice(indexToRemove, 1);
+    }
+  }
+
+  // Shade in grey remaining letters
+  for (let i = 0; i < answerArray.length; i++) {
+    if (!answerArray.includes(guessArray[i]) && !matchedIndexes.includes(i)) {
       if (i === 0) GL1.style.backgroundColor = "lightgrey";
       if (i === 1) GL2.style.backgroundColor = "lightgrey";
       if (i === 2) GL3.style.backgroundColor = "lightgrey";
       if (i === 3) GL4.style.backgroundColor = "lightgrey";
       if (i === 4) GL5.style.backgroundColor = "lightgrey";
-      document.getElementById(`${guessArray[i]}`).style.backgroundColor =
-        "lightgrey";
+      if (
+        document.getElementById(`${guessArray[i]}`).style.backgroundColor !==
+          "green" &&
+        document.getElementById(`${guessArray[i]}`).style.backgroundColor !==
+          "orange"
+      ) {
+        document.getElementById(`${guessArray[i]}`).style.backgroundColor =
+          "lightgrey";
+      }
     }
   }
 
