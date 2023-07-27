@@ -205,6 +205,7 @@ function submitGuess() {
     ) {
       answerArray[answerArray.indexOf(guessArray[i])] = "removed";
       console.log(answerArray);
+      matchedIndexes.push(i);
       if (i === 0) GL1.style.backgroundColor = "orange";
       if (i === 1) GL2.style.backgroundColor = "orange";
       if (i === 2) GL3.style.backgroundColor = "orange";
