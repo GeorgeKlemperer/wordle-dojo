@@ -156,6 +156,16 @@ function submitGuess() {
   let GL4 = document.getElementById(`guessLetter${guessNumber}-4`);
   let GL5 = document.getElementById(`guessLetter${guessNumber}-5`);
 
+  let matchedIndexes = [];
+
+  for (let i = 0; i < answerArray.length; i++) {
+    if (guessArray[i] === answerArray[i]) {
+      // Mark the matched index for avoiding double counting
+      matchedIndexes.push(i);
+      console.log(matchedIndexes);
+    }
+  }
+
   // Compare the two arrays
   for (let i = 0; i < answerArray.length; i++) {
     if (guessArray[i] === answerArray[i]) {
