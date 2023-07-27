@@ -156,13 +156,13 @@ function submitGuess() {
   let GL4 = document.getElementById(`guessLetter${guessNumber}-4`);
   let GL5 = document.getElementById(`guessLetter${guessNumber}-5`);
 
-  let matchedIndexes = [];
+  let matchedLetters = [];
 
   for (let i = 0; i < answerArray.length; i++) {
     if (guessArray[i] === answerArray[i]) {
       // Mark the matched index for avoiding double counting
-      matchedIndexes.push(i);
-      console.log(matchedIndexes);
+      matchedLetters.push(guessArray[i]);
+      console.log(`Matched letters: ${matchedLetters}`);
     }
   }
 
