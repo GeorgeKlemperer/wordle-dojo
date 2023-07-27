@@ -160,15 +160,25 @@ function submitGuess() {
 
   for (let i = 0; i < answerArray.length; i++) {
     if (guessArray[i] === answerArray[i]) {
-      // Mark the matched index for avoiding double counting
       matchedLetters.push(guessArray[i]);
       console.log(`Matched letters: ${matchedLetters}`);
+    }
+  }
+
+  let matchedIndexes = [];
+
+  for (let i = 0; i < answerArray.length; i++) {
+    if (guessArray[i] === answerArray[i]) {
+      matchedIndexes.push(i);
+      console.log(`Matched indexes: ${matchedIndexes}`);
     }
   }
 
   // Compare the two arrays
   for (let i = 0; i < answerArray.length; i++) {
     if (guessArray[i] === answerArray[i]) {
+      answerArray[i] = "removed";
+      console.log(answerArray);
       if (i === 0) GL1.style.backgroundColor = "green";
       if (i === 1) GL2.style.backgroundColor = "green";
       if (i === 2) GL3.style.backgroundColor = "green";
@@ -185,7 +195,16 @@ function submitGuess() {
       ) {
         winGame();
       }
-    } else if (answerArray.includes(guessArray[i])) {
+    }
+  }
+
+  for (let i = 0; i < answerArray.length; i++) {
+    if (
+      answerArray.includes(guessArray[i]) &&
+      !matchedLetters.includes(guessArray[i])
+    ) {
+      answerArray[answerArray.indexOf(guessArray[i])] = "removed";
+      console.log(answerArray);
       if (i === 0) GL1.style.backgroundColor = "orange";
       if (i === 1) GL2.style.backgroundColor = "orange";
       if (i === 2) GL3.style.backgroundColor = "orange";
@@ -198,14 +217,31 @@ function submitGuess() {
         document.getElementById(`${guessArray[i]}`).style.backgroundColor =
           "orange";
       }
-    } else {
+    } else if (
+      answerArray.includes(guessArray[i]) &&
+      matchedLetters.includes(guessArray[i])
+    ) {
+      let indexToRemove = matchedLetters.indexOf(guessArray[i]);
+      matchedLetters.splice(indexToRemove, 1);
+    }
+  }
+
+  for (let i = 0; i < answerArray.length; i++) {
+    if (!answerArray.includes(guessArray[i]) && !matchedIndexes.includes(i)) {
       if (i === 0) GL1.style.backgroundColor = "lightgrey";
       if (i === 1) GL2.style.backgroundColor = "lightgrey";
       if (i === 2) GL3.style.backgroundColor = "lightgrey";
       if (i === 3) GL4.style.backgroundColor = "lightgrey";
       if (i === 4) GL5.style.backgroundColor = "lightgrey";
-      document.getElementById(`${guessArray[i]}`).style.backgroundColor =
-        "lightgrey";
+      if (
+        document.getElementById(`${guessArray[i]}`).style.backgroundColor !==
+          "green" &&
+        document.getElementById(`${guessArray[i]}`).style.backgroundColor !==
+          "orange"
+      ) {
+        document.getElementById(`${guessArray[i]}`).style.backgroundColor =
+          "lightgrey";
+      }
     }
   }
 
