@@ -187,13 +187,7 @@ function submitGuess() {
       if (i === 4) GL5.style.backgroundColor = "green";
       document.getElementById(`${guessArray[i]}`).style.backgroundColor =
         "green";
-      if (
-        GL1.style.backgroundColor === "green" &&
-        GL2.style.backgroundColor === "green" &&
-        GL3.style.backgroundColor === "green" &&
-        GL4.style.backgroundColor === "green" &&
-        GL5.style.backgroundColor === "green"
-      ) {
+      if (matchedIndexes.length === 5) {
         winGame();
       }
     }
