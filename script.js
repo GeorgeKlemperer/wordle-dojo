@@ -166,6 +166,15 @@ function submitGuess() {
       if (i === 4) GL5.style.backgroundColor = "green";
       document.getElementById(`${guessArray[i]}`).style.backgroundColor =
         "green";
+      if (
+        GL1.style.backgroundColor === "green" &&
+        GL2.style.backgroundColor === "green" &&
+        GL3.style.backgroundColor === "green" &&
+        GL4.style.backgroundColor === "green" &&
+        GL5.style.backgroundColor === "green"
+      ) {
+        winGame();
+      }
     } else if (answerArray.includes(guessArray[i])) {
       if (i === 0) GL1.style.backgroundColor = "orange";
       if (i === 1) GL2.style.backgroundColor = "orange";
@@ -199,6 +208,12 @@ function submitGuess() {
   }
 }
 
+function winGame() {
+  answerElement.style.visibility = "visible";
+  guessNumber = undefined;
+}
+
 function loseGame() {
   answerElement.style.visibility = "visible";
+  guessNumber = undefined;
 }
