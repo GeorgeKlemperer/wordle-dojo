@@ -42,6 +42,7 @@ body {
 
 .date {
   text-align: left;
+  font-weight: bold;
 }
 
 #randomWord {
